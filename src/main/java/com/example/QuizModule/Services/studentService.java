@@ -17,4 +17,5 @@ public interface studentService {
     public List<Student> getAllStudent();
 
     public Integer deleteStudent(Integer studentId);
+
 }

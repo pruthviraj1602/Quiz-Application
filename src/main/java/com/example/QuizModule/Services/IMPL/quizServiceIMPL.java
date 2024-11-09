@@ -30,7 +30,7 @@ public class quizServiceIMPL implements quizService {
     public ResponseEntity<String> createQuiz(String category, int numQ, String tittle) {
 
         List<Question> questions=questionRepository.findRandomQuestionsByCategory(category,numQ);
-//        List<Question> questions=questionRepository.getQuestionByQuestionCategory(category);
+
         System.out.println(questions);
 
 
@@ -77,6 +77,9 @@ public class quizServiceIMPL implements quizService {
 
             i++;
         }
+
         return new ResponseEntity<>(right,HttpStatus.CREATED);
     }
+
+
 }
