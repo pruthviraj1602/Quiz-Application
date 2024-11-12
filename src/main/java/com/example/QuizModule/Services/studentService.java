@@ -18,4 +18,8 @@ public interface studentService {
 
     public Integer deleteStudent(Integer studentId);
 
+    public Student updateStudent(Student student);
+
+
+
 }

@@ -1,15 +1,13 @@
 package com.example.QuizModule.Services;
 
-import com.example.QuizModule.Entities.Question;
-import com.example.QuizModule.Entities.Response;
-import com.example.QuizModule.Entities.questionWrapper;
+import com.example.QuizModule.Entities.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface quizService {
 
-    public ResponseEntity<String> createQuiz(String category, int numQ, String tittle);
+    public Quiz createQuiz(createQuiz createQuiz);
 
 //    public List<Question> startQuiz(Integer id);
 public ResponseEntity<List<questionWrapper>> getQuizQuestion(Integer id);

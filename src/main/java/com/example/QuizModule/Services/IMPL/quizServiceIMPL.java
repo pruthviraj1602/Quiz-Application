@@ -1,9 +1,6 @@
 package com.example.QuizModule.Services.IMPL;
 
-import com.example.QuizModule.Entities.Question;
-import com.example.QuizModule.Entities.Quiz;
-import com.example.QuizModule.Entities.Response;
-import com.example.QuizModule.Entities.questionWrapper;
+import com.example.QuizModule.Entities.*;
 import com.example.QuizModule.Repository.QuizRepository;
 import com.example.QuizModule.Repository.questionRepository;
 import com.example.QuizModule.Services.quizService;
@@ -27,29 +24,18 @@ public class quizServiceIMPL implements quizService {
 
 
     @Override
-    public ResponseEntity<String> createQuiz(String category, int numQ, String tittle) {
+    public Quiz createQuiz(createQuiz createquiz) {
 
-        List<Question> questions=questionRepository.findRandomQuestionsByCategory(category,numQ);
-
-        System.out.println(questions);
-
+        List<Question> questions=questionRepository.findRandomQuestionsByCategory(createquiz.getCategory(),createquiz.getNumQ());
 
         Quiz quiz=new Quiz();
-        quiz.setTittle(tittle);
+        quiz.setTittle(createquiz.getTittle());
         quiz.setQuestions(questions);
 
-        quizRepository.save(quiz);
-
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        return quizRepository.save(quiz);
     }
 
-//    @Override
-//    public List<Question> startQuiz(Integer id) {
-//        Quiz quizById = quizRepository.getQuizById(id);
-//        List<Question> questions = quizById.getQuestions();
-//
-//        return  questions;
-//    }
+
 
     @Override
     public ResponseEntity<List<questionWrapper>> getQuizQuestion(Integer id) {

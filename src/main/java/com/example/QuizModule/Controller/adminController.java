@@ -1,7 +1,9 @@
 package com.example.QuizModule.Controller;
 
 import com.example.QuizModule.Entities.Question;
+import com.example.QuizModule.Entities.Quiz;
 import com.example.QuizModule.Entities.Student;
+import com.example.QuizModule.Entities.createQuiz;
 import com.example.QuizModule.Services.IMPL.questionServiceIMPL;
 import com.example.QuizModule.Services.IMPL.quizServiceIMPL;
 import com.example.QuizModule.Services.IMPL.studentServiceIMPL;
@@ -87,9 +89,21 @@ public class adminController {
 
     //Generate Quiz
     @PostMapping("/createQuiz")
-    public ResponseEntity<String> createQuiz(@RequestParam String category,@RequestParam int numQ,@RequestParam String tittle){
-       return quizServiceIMPL.createQuiz(category,numQ,tittle);
-//        System.out.println(category+" "+numQ+" "+tittle);
+    public ResponseEntity<String> createQuiz(@RequestBody createQuiz createquiz){
+        Quiz quiz = quizServiceIMPL.createQuiz(createquiz);
+        if(quiz!=null){
+           return ResponseEntity.status(HttpStatus.OK).body("Quiz Created...");
+        }
+     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Qui Not Created");
     }
 
+    @PutMapping("/updateStudent")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student){
+        student.setRole("ROLE_USER");
+        Student updatedStudent = studentServiceIMPL.updateStudent(student);
+        if(updatedStudent!=null){
+            return ResponseEntity.status(HttpStatus.OK).body(updatedStudent);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
 }

@@ -42,4 +42,12 @@ public class studentServiceIMPL implements studentService {
     public Integer deleteStudent(Integer studentId) {
         return studentRepository.deleteStudentByStudentId(studentId);
     }
+
+    @Override
+    public Student updateStudent(Student student) {
+        student.setStudentPassword(passwordEncoder().encode(student.getStudentPassword()));
+        return studentRepository.save(student);
+    }
+
+
 }
